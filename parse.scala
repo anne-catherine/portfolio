@@ -7,11 +7,14 @@ import scala.xml._
 
 
 object ParsedWords {
-
-
-
-  def main(args: Array[String]) {
-
+def main(args: Array[String]) {
+  val lines = Source.fromFile(args(0)).getLines.toVector
+  val txt = lines.mkString
+  val words = txt.split("\\W+").filterNot(_.isEmpty).distinct
+  for (w <- words) {
+    println(w + "\t" + parse(w))
+  }
+}
 
 
 def lemmaForEntry (nseq: NodeSeq) = {
@@ -40,6 +43,8 @@ def formatEntry(e: Elem) : String = {
 def parse (s: String)  = {
      val baseUrl = "https://services.perseids.org/bsp/morphologyservice/analysis/word?&lang=lat&engine=morpheuslat&word="
      val request = baseUrl + s
+
+
      val morphReply = scala.io.Source.fromURL(request).mkString
 
      val root = XML.loadString(morphReply)
@@ -48,20 +53,13 @@ def parse (s: String)  = {
      val lexent = entries.map( e => e match {
      case el: Elem => formatEntry(el)
      case _ => ""
+
     } )
     lexent
-    }
-
-
-
-    val lines = Source.fromFile(args(0)).getLines.toVector
-    val txt = lines.mkString
-    val words = txt.split("\\W+").filterNot(_.isEmpty).distinct
-
-    words.map (w => (w, parse (w)) )
   }
 
 }
+
 
 
 ParsedWords.main(args)
