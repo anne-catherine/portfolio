@@ -16,10 +16,12 @@ object ParsedWords {
     val words = txt.split("\\W+").filterNot(_.isEmpty).distinct
 
     for (w <- words){
+      print(w + "\t")
       val parsed = parse(w)
       for (p <- parsed) {
-          println(w + "\t" + p)
+          print(p + " ")
       }
+      println("")
     }
 }
 
