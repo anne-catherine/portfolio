@@ -10,19 +10,11 @@ object WordFreq {
 
     val lines = Source.fromFile(args(0)).getLines.toVector
 
-    println("Read "  + lines.size + " sections")
-
     val txt = lines.mkString
-
-    println ("Read " + txt.size + " characters.")
 
     val words = txt.split("\\W+").filterNot(_.isEmpty)
 
-    println("Read " + words.size + " words.")
-
     val grouped = words.groupBy(w => w)
-
-    println ("Read " + grouped.size + " unique words.")
 
     val freqs = grouped.map { case (k,v) => (k,v.size) }
 
@@ -31,6 +23,11 @@ object WordFreq {
     for (wd <- sorted ) {
      println(wd)
      }
+
+println("Read " + lines.size + " sections.")
+println ("Read " + txt.size + " characters.")
+println("Read " + words.size + " words.")
+println ("Read " + grouped.size + " unique words.")
 
   }
 
