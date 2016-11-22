@@ -12,7 +12,7 @@ def aligned(s: String, parsedList: Vector[Array[String]] ) = {
 
 
   val text = Source.fromFile("dbc.txt").getLines.toVector
-  val textSplit = text.map(_.split("\t"))git 
+  val textSplit = text.map(_.split("\t"))
   val sections = textSplit.map(_(1))
   val reff = textSplit.map(_(0))
 
