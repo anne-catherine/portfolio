@@ -2,13 +2,13 @@ import scala.io.Source
 
 
 def aligned(s: String, parsedList: Vector[Array[String]] ) = {
-    val parsedWord = parsedList.filter(_(0) == s)
-    if (parsedWord.size == 0) {
-      s
-    } else {
-      parsedWord.map(_(1)).mkString(",")
-    }
+  val parsedWord = parsedList.filter(_(0) == s)
+  if (parsedWord.size == 0) {
+    s
+  } else {
+    parsedWord.map(_(1)).mkString(",")
   }
+}
 
 
   val text = Source.fromFile("dbc.txt").getLines.toVector
@@ -26,4 +26,6 @@ def aligned(s: String, parsedList: Vector[Array[String]] ) = {
     words.map ( w => aligned(w,wordList) ).mkString(" ")
   }
 
- println(alignedText)
+  for (t <- alignedText) {
+    println(t)
+  }
